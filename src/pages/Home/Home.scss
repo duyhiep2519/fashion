@@ -1,0 +1,39 @@
+@import "styles/variables";
+.pagination {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .pagination-list {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    .pagination-item {
+      padding: 0 15px;
+      font-size: 16px;
+      font-weight: 500;
+      color: $text;
+      &:hover {
+        cursor: pointer;
+        color: $primary;
+      }
+    }
+    .active {
+      color: $primary;
+    }
+  }
+}
+.showmore {
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  color: $text;
+  &:hover {
+    color: $primary;
+  }
+}
+.showmore--disabled {
+  display: none;
+}

@@ -1,0 +1,29 @@
+@import "styles/variables";
+
+.section-titles {
+  margin-top: 50px;
+  text-align: center;
+  .section-title {
+    font-size: 25px;
+    font-weight: 700;
+    color: $text;
+    font-family: Libre Baskerville;
+    position: relative;
+    text-transform: uppercase;
+    &::after,
+    &::before {
+      content: "";
+      display: inline-block;
+      height: 2px;
+      background: $text;
+      width: 60px;
+      margin: 0 10px 5px;
+    }
+  }
+  .section-subtitle {
+    font-size: 14px;
+    color: $text;
+    font-weight: 400;
+    font-family: Libre Baskerville;
+  }
+}

@@ -1,0 +1,118 @@
+@import "styles/variables";
+.swiper {
+  position: relative;
+}
+.swiper__text--right {
+  position: absolute;
+  top: 40%;
+  right: 8%;
+  opacity: 0;
+
+  span {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 5px 0;
+  }
+
+  .swiper__btn {
+    background: $text;
+    color: $white;
+    width: 150px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0;
+    transition: 0.3s linear;
+
+    &:hover {
+      background: rgb(59, 57, 57);
+      cursor: pointer;
+    }
+  }
+}
+.swiper__text {
+  position: absolute;
+  top: 40%;
+  left: 8%;
+
+  span {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 5px 0;
+  }
+
+  .swiper__btn {
+    background: $text;
+    color: $white;
+    width: 150px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px 0;
+    transition: 0.3s linear;
+
+    &:hover {
+      background: rgb(59, 57, 57);
+      cursor: pointer;
+    }
+  }
+}
+
+.swiper__text--active {
+  transform: translateX(-130%);
+  animation: slideToRight linear 1s forwards;
+  transition: 1s linear;
+}
+.swiper__text--activeRight {
+  animation: fadeIn linear 1s forwards;
+  transition: opacity 1s linear;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes slideToRight {
+  from {
+    transform: translateX(-130%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 739px) {
+  .swiper__text {
+    left: 2%;
+  }
+  .swiper__text--right {
+    right: 2%;
+  }
+  .swiper__text,
+  .swiper__text--right {
+    top: 15%;
+
+    span {
+      font-size: 12px;
+      font-weight: 300;
+    }
+    h1 {
+      font-size: 13px;
+    }
+    .swiper__btn {
+      font-size: 12px;
+      width: 100px;
+      height: 30px;
+    }
+  }
+}

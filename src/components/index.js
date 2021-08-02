@@ -1,0 +1,11 @@
+export { default as Header } from "./Header";
+export { default as Slider } from "./Slider";
+export { default as GridContent } from "./GridContent";
+export { default as Section } from "./SectionTitle";
+export { default as ProductCard } from "./ProductCard";
+export { default as Badge } from "./Badge";
+export { default as QuickView } from "./QuickView";
+export { default as CartSlide } from "./CartSlide";
+export { default as QuickShop } from "./QuickShop";
+export { default as Suggestion } from "./Suggestion";
+export { default as Footer } from "./Footer";

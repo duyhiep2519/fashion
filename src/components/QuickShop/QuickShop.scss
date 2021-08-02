@@ -1,0 +1,180 @@
+@import "styles/variables";
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slideToTop {
+  from {
+    opacity: 0;
+    transform: translateY(130%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+.quickshop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  animation: fadeIn ease-in-out 0.5s forwards;
+  transition: all 0.5s ease-in-out;
+  .quickshop__overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+  }
+  .quickshop__body {
+    border-radius: 5px;
+    position: relative;
+    width: 350px;
+    height: 420px;
+    background-color: $white;
+    transform: translateY(130%);
+    opacity: 0;
+    animation: slideToTop linear 0.3s forwards;
+    transition: all 0.3s linear;
+    .quickshop__header {
+      padding: 10px 0;
+      display: flex;
+      justify-content: space-around;
+
+      img {
+        width: 25%;
+        border-radius: 5px;
+      }
+      .quickshop__info {
+        .quickshop__price {
+          opacity: 0.6;
+        }
+        .quickshop__price-old {
+          opacity: 0.6;
+          text-decoration: line-through;
+        }
+        .quickshop__price-new {
+          color: #ef4b33;
+        }
+      }
+      .quickshop__close {
+        font-size: 20px;
+        &:hover {
+          cursor: pointer;
+          color: $primary;
+        }
+      }
+    }
+    .quickshop__size {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      p {
+        font-size: 16px;
+        font-weight: 600;
+      }
+      .ul-size {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        list-style: none;
+        .item-size {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 34px;
+          height: 34px;
+          border: 1px solid rgba(129, 129, 129, 0.2);
+          cursor: pointer;
+          border-radius: 50%;
+          margin-right: 10px;
+          transition: all 0.3s linear;
+        }
+        .active {
+          background: $text;
+          color: $white;
+        }
+      }
+    }
+    .quickshop__btn {
+      display: flex;
+      align-items: center;
+      padding: 16px 0;
+      flex-direction: column;
+
+      .quickshop__input {
+        display: flex;
+        align-items: center;
+        border: 1px solid rgba(129, 129, 129, 0.2);
+        border-radius: 30px;
+        padding: 0 16px;
+        span svg {
+          font-size: 20px;
+          font-weight: 600;
+          color: $text;
+          &:hover {
+            color: $primary;
+            cursor: pointer;
+          }
+        }
+        input[type="text"] {
+          display: block;
+          width: 35px;
+          border: none;
+          outline: none;
+          height: 38px;
+          background: 0 0;
+          padding: 0;
+          font-weight: 600;
+          font-size: 14px;
+          color: #222;
+          text-align: center;
+        }
+      }
+      .quickshop__addToCart button {
+        margin: 16px 0;
+        padding: 10px;
+        min-width: 250px;
+        outline: none;
+        border: none;
+        background: $primary;
+        border-radius: 20px;
+        position: relative;
+        transition: all 0.3s linear;
+        animation: shakeAnim ease-in 3s infinite;
+        color: $white;
+        text-transform: uppercase;
+        &:hover {
+          cursor: pointer;
+          background: $text;
+        }
+      }
+    }
+    .quickshop__detail {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 500;
+      transition: all 0.3s linear;
+      a {
+        text-decoration: none;
+        color: $text;
+        &:hover {
+          color: $primary;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
