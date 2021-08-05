@@ -15,7 +15,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import FadeLoader from "react-spinners/FadeLoader";
 import { toast } from "react-toastify";
 import { getCartByUser } from "redux/ducks/cartSlice";
-import { Suggestion } from "components";
+import { Suggestion, RecentView } from "components";
 import SwiperCore, { EffectFade, Navigation, Pagination, Zoom } from "swiper";
 import "swiper/components/navigation/navigation.min.css";
 import "swiper/components/pagination/pagination.min.css";
@@ -25,6 +25,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/swiper.min.css";
 import "./Detail.scss";
+import { getPrice, getPriceSale } from "helper/price";
 
 SwiperCore.use([EffectFade, Zoom, Navigation, Pagination]);
 
@@ -102,14 +103,15 @@ function Detail() {
                   <p className="detail__price">
                     {product.sale ? (
                       <>
-                        <span className="price-old">${product.price} </span>
+                        <span className="price-old">
+                          {getPrice(product.price)}{" "}
+                        </span>
                         <span className="price">
-                          $
-                          {product.price - (product.price * product.sale) / 100}
+                          {getPriceSale(product.price, product.sale)}
                         </span>
                       </>
                     ) : (
-                      <span>${product.price}</span>
+                      <span>{getPrice(product.price)}</span>
                     )}
                   </p>
 
@@ -218,6 +220,7 @@ function Detail() {
             </div>
           </div>
           <Suggestion />
+          <RecentView />
         </>
       ) : (
         <div className="detail--loading">

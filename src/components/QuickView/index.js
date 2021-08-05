@@ -23,6 +23,7 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { getCartByUser } from "redux/ducks/cartSlice";
 import { Link } from "react-router-dom";
+import { getPriceSale, getPrice } from "helper/price";
 
 SwiperCore.use([Pagination, EffectFade, Navigation]);
 
@@ -83,13 +84,15 @@ function QuickView(props) {
               <p className="modal__price">
                 {product.sale ? (
                   <>
-                    <span className="price-old">${product.price} </span>
+                    <span className="price-old">
+                      {getPrice(product.price)}{" "}
+                    </span>
                     <span className="price">
-                      ${product.price - (product.price * product.sale) / 100}
+                      {getPriceSale(product.price, product.sale)}
                     </span>
                   </>
                 ) : (
-                  <span>${product.price}</span>
+                  <span>{getPrice(product.price)}</span>
                 )}
               </p>
               <p className="modal__description">{product.description}</p>

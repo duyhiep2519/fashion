@@ -22,7 +22,8 @@ import axiosClient from "api/axiosClient";
 
 function Header() {
   const { isLogin, user } = useSelector((state) => state.user);
-  const { cart } = useSelector((state) => state.cart);
+  const { cart, wishlist } = useSelector((state) => state.cart);
+  console.log(wishlist);
 
   const dispatch = useDispatch();
 
@@ -129,20 +130,28 @@ function Header() {
               </Link>
             </li>
             <li className="tabBottom-item">
-              <Link to="/">
+              <Link to="/wishlist">
                 <span className="itemForBadge">
-                  <AiOutlineHeart /> <span className="badgeForItem">1</span>{" "}
+                  <AiOutlineHeart />{" "}
+                  <span className="badgeForItem">
+                    {wishlist && wishlist.items.length
+                      ? wishlist.items.length
+                      : 0}
+                  </span>{" "}
                   Wishlist
                 </span>
               </Link>
             </li>
             <li className="tabBottom-item">
-              <label htmlFor="auth-checkbox">
-                <span>
+              {isLogin && user != null ? (
+                <label htmlFor="auth-checkbox">
+                  <img alt="userphoto" src={user.photo}></img>{" "}
+                </label>
+              ) : (
+                <label htmlFor="auth-checkbox">
                   <AiOutlineUser />
-                  Account
-                </span>
-              </label>
+                </label>
+              )}
             </li>
           </ul>
         </div>
@@ -206,9 +215,9 @@ function Header() {
             </li>
 
             <li className="header__nav-item">
-              <Link to="/">
+              <Link to="/wishlist">
                 <AiOutlineHeart />
-                <Badge index={1} />
+                <Badge index={wishlist ? wishlist.items.length : 0} />
               </Link>
             </li>
             <li className="header__nav-item">
@@ -248,9 +257,15 @@ function Header() {
             </li>
 
             <li className="header__nav-item">
-              <Link to="/">
+              <Link to="/cart">
                 <AiOutlineShoppingCart />
-                <Badge index={1} />
+                <Badge
+                  index={
+                    cart && cart.items && cart.items.length > 0
+                      ? cart.items.length
+                      : 0
+                  }
+                />
               </Link>
             </li>
           </ul>

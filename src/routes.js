@@ -1,4 +1,4 @@
-import { Home, Login, Cart, Detail } from "pages";
+import { Home, Login, Cart, Detail, Wishlist, ErrorPage } from "pages";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Header, Footer } from "components";
 import { AiOutlineArrowUp } from "react-icons/ai";
@@ -43,6 +43,8 @@ function App() {
         <Route name="Login" path="/login" component={Login} />
         <Route name="Cart" path="/cart" component={Cart} />
         <Route name="Detail" path="/detail/:slug" component={Detail} />
+        <Route name="Wishlist" path="/wishlist" component={Wishlist} />
+        <Route path="*" exact={true} component={ErrorPage} />
       </Switch>
       <Footer />
       {visible && (

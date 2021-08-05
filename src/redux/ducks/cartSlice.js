@@ -4,6 +4,7 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState: {
     cart: null,
+    wishlist: null,
     error: "",
   },
   reducers: {
@@ -13,10 +14,14 @@ export const cartSlice = createSlice({
     getCartByUser: (state, action) => {
       state.cart = action.payload;
     },
+    getWishlistByUser: (state, action) => {
+      state.wishlist = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { getCartByUser, getCartByUserFail } = cartSlice.actions;
+export const { getCartByUser, getCartByUserFail, getWishlistByUser } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

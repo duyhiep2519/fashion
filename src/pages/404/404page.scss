@@ -1,0 +1,19 @@
+@import "styles/variables";
+.page404 {
+  text-align: center;
+  min-height: 400px;
+  h1 {
+    font-size: 100px;
+  }
+  p {
+    font-weight: bold;
+  }
+  span {
+    opacity: 0.8;
+    a {
+      opacity: 1;
+      color: $text;
+      font-weight: bold;
+    }
+  }
+}

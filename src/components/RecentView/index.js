@@ -1,31 +1,27 @@
+import axiosClient from "api/axiosClient";
+import { ProductCard, Section } from "components";
 import React, { useEffect, useState } from "react";
+import "swiper/components/pagination/pagination.min.css";
+// import Swiper core and required modules
+import SwiperCore, { Pagination } from "swiper/core";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/swiper.min.css";
-import "swiper/components/pagination/pagination.min.css";
-import "./Suggest.scss";
-import { Section } from "components";
-
-// import Swiper core and required modules
-import SwiperCore, { Pagination } from "swiper/core";
-import { ProductCard } from "components";
-import axiosClient from "api/axiosClient";
+import "../Suggestion/Suggest.scss";
 
 // install Swiper modules
 SwiperCore.use([Pagination]);
 
-function Suggestion() {
+function RecentView() {
   const [listSuggest, setListSuggest] = useState();
 
   useEffect(() => {
     function fetchPage() {
       axiosClient
-        .get(`/product`, {
-          params: { page: 1, limit: 20 },
-        })
+        .get(`/cart/cartInfo`)
         .then((response) => {
-          setListSuggest(response.result);
+          setListSuggest(response.items);
         })
         .catch((error) => {});
     }
@@ -34,14 +30,14 @@ function Suggestion() {
   }, []);
   return (
     <>
-      <Section title="You may so like" />
+      <Section title="Recently viewed products" />
       <div className="suggestion grid wide">
         <Swiper slidesPerView={"auto"} spaceBetween={30} className="mySwiper">
           {listSuggest &&
             listSuggest.map((item, index) => (
               <div key={index}>
                 <SwiperSlide>
-                  <ProductCard product={item} />
+                  <ProductCard product={item.product} />
                 </SwiperSlide>
               </div>
             ))}
@@ -51,4 +47,4 @@ function Suggestion() {
   );
 }
 
-export default Suggestion;
+export default RecentView;

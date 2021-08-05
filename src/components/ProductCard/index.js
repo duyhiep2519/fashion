@@ -4,17 +4,78 @@ import {
   AiOutlineHeart,
   AiOutlineShoppingCart,
   AiOutlineEye,
+  AiOutlineDelete,
 } from "react-icons/ai";
 import { QuickView, QuickShop } from "components";
 import ClipLoader from "react-spinners/ClipLoader";
-
+import { getPriceSale, getPrice } from "helper/price";
+import axiosClient from "api/axiosClient";
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { getWishlistByUser } from "redux/ducks/cartSlice";
 function ProductCard(props) {
-  const { product } = props;
+  const { product, wishlist } = props;
   const [imgBackground, setImageBackground] = useState(product.image[0]);
   const [show, setShow] = useState(false);
   const [showQuickShop, setShowQuickShop] = useState(false);
   const [loadingShop, setLoadingShop] = useState(false);
   const [loadingView, setLoadingView] = useState(false);
+  const dispatch = useDispatch();
+
+  //add to wishlist
+  function addToWishlist(id) {
+    axiosClient
+      .post(`/wishlist/addToWishlist?productId=${id}`)
+      .then((response) => {
+        dispatch(getWishlistByUser(response));
+        toast.success("Product has been added to wishlist", {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          draggable: true,
+          progress: undefined,
+        });
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message, {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+
+          draggable: true,
+          progress: undefined,
+        });
+      });
+  }
+  //add to wishlist
+  function removeFromWishlist(id) {
+    axiosClient
+      .delete(`/wishlist/removeFromWishlist?productId=${id}`)
+      .then((response) => {
+        dispatch(getWishlistByUser(response));
+        toast.success("Product has been removed", {
+          position: "top-right",
+          autoClose: 900,
+          hideProgressBar: false,
+          closeOnClick: true,
+          draggable: true,
+          progress: undefined,
+        });
+      })
+      .catch((err) => {
+        toast.error("Somethings wrong", {
+          position: "top-right",
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeOnClick: true,
+
+          draggable: true,
+          progress: undefined,
+        });
+      });
+  }
   return (
     <>
       <QuickShop
@@ -38,9 +99,21 @@ function ProductCard(props) {
         ></div>
 
         <div className="product-lable">
-          <span className="wishlist-label">
-            <AiOutlineHeart />
-          </span>
+          {wishlist ? (
+            <span
+              className="wishlist-label"
+              onClick={() => removeFromWishlist(product._id)}
+            >
+              <AiOutlineDelete />
+            </span>
+          ) : (
+            <span
+              className="wishlist-label"
+              onClick={() => addToWishlist(product._id)}
+            >
+              <AiOutlineHeart />
+            </span>
+          )}
           {product.sale && (
             <span className="info-label--sale">-{product.sale}%</span>
           )}
@@ -103,13 +176,14 @@ function ProductCard(props) {
         <div className="product-price">
           {product.sale ? (
             <div>
-              <span className="span-price-sale">${product.price}</span> -{" "}
+              <span className="span-price-sale">{getPrice(product.price)}</span>{" "}
+              -{" "}
               <span className="span-sale">
-                ${product.price - product.price * (product.sale / 100)}
+                {getPriceSale(product.price, product.sale)}
               </span>
             </div>
           ) : (
-            <span className="span-price">${product.price}</span>
+            <span className="span-price">{getPrice(product.price)}</span>
           )}
         </div>
       </div>

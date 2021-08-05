@@ -305,6 +305,7 @@ input {
 
       &:hover {
         color: $primary;
+        cursor: pointer;
       }
     }
     span {
@@ -314,6 +315,13 @@ input {
       justify-content: space-around;
       svg {
         font-size: 2rem;
+      }
+    }
+    .tabBottom-item {
+      label img {
+        width: 50%;
+        border-radius: 50%;
+        cursor: pointer;
       }
     }
   }

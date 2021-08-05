@@ -12,6 +12,7 @@ import "./QuickShop.scss";
 import { useDispatch } from "react-redux";
 import { getCartByUser } from "redux/ducks/cartSlice";
 import { Link } from "react-router-dom";
+import { getPriceSale, getPrice } from "helper/price";
 //sizeArray
 const sizeArray = ["S", "M", "L", "XL"];
 
@@ -51,14 +52,14 @@ function QuickShop(props) {
                 {product.sale ? (
                   <div>
                     <span className="quickshop__price-old">
-                      ${product.price}
+                      {getPrice(product.price)}
                     </span>{" "}
                     <span className="quickshop__price-new">
-                      ${product.price - (product.price * product.sale) / 100}
+                      {getPriceSale(product.price, product.sale)}
                     </span>
                   </div>
                 ) : (
-                  <p className="quickshop__price">${product.price}</p>
+                  <p className="quickshop__price">{getPrice(product.price)}</p>
                 )}
               </div>
               <div onClick={() => setShow(false)} className="quickshop__close">

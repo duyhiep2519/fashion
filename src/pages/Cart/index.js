@@ -5,6 +5,7 @@ import { AiOutlineDelete, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { BiEdit } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import { getCartByUser } from "redux/ducks/cartSlice";
+import { getPrice, getPriceSale } from "helper/price";
 import "./Cart.scss";
 
 function Cart() {
@@ -85,7 +86,9 @@ function Cart() {
                   </div>
                 </div>
                 <div className="cart__price col l-2 m-2 c-12">
-                  ${item.product.price}
+                  {item.product.sale
+                    ? getPriceSale(item.product.price, item.product.sale)
+                    : getPrice(item.product.price)}
                 </div>
                 <div className="cart__quantity col l-3 m-3 c-12">
                   <div className="cart__btn">
@@ -120,7 +123,8 @@ function Cart() {
                   </div>
                 </div>
                 <div className="cart__total col l-2 m-2 c-12">
-                  <span>Total</span>: ${item.product.price * item.quantity}
+                  <span>Total</span>:{" "}
+                  {getPrice(item.product.price * item.quantity)}
                 </div>
               </div>
             </>
