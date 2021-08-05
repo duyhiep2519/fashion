@@ -9,6 +9,7 @@ import {
   getProductByPageFail,
 } from "redux/ducks/productSlice";
 import "./Home.scss";
+import { toast } from "react-toastify";
 
 function Home() {
   let scroll = Scroll.animateScroll;
@@ -20,16 +21,25 @@ function Home() {
 
   useEffect(() => {
     function fetchPage() {
-      setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-      }, 1000);
       axiosClient
         .get(`/product`, {
           params: { page: page, limit: limit },
         })
         .then((response) => {
-          dispatch(getProductByPage(response));
+          setLoading(true);
+          setTimeout(() => {
+            dispatch(getProductByPage(response));
+            setLoading(false);
+            toast.info("Great shopping experience here!", {
+              position: "top-center",
+              autoClose: 1000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+          }, 100);
         })
         .catch((error) => {
           dispatch(getProductByPageFail(error.message));
@@ -55,7 +65,7 @@ function Home() {
             <div className="row">
               {list &&
                 list.map((product, index) => (
-                  <div key={index} className="col l-3 m-4 c-6">
+                  <div key={index} className="col l-3 m-6 c-6">
                     <ProductCard product={product} />
                   </div>
                 ))}

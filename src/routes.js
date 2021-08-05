@@ -1,4 +1,12 @@
-import { Home, Login, Cart, Detail, Wishlist, ErrorPage } from "pages";
+import {
+  Home,
+  Login,
+  Cart,
+  Detail,
+  Wishlist,
+  ErrorPage,
+  SalePage,
+} from "pages";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Header, Footer } from "components";
 import { AiOutlineArrowUp } from "react-icons/ai";
@@ -6,9 +14,11 @@ import { useEffect, useState, useRef } from "react";
 import * as Scroll from "react-scroll";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useSelector } from "react-redux";
 
 function App() {
   let scroll = Scroll.animateScroll;
+  const { isLogin } = useSelector((state) => state.user);
   const [visible, setVisible] = useState(false);
   const prevY = useRef(0);
   useEffect(() => {
@@ -40,10 +50,11 @@ function App() {
       <Header />
       <Switch>
         <Route name="Home" exact path="/" component={Home} />
-        <Route name="Login" path="/login" component={Login} />
+        {!isLogin && <Route name="Login" path="/login" component={Login} />}
         <Route name="Cart" path="/cart" component={Cart} />
         <Route name="Detail" path="/detail/:slug" component={Detail} />
         <Route name="Wishlist" path="/wishlist" component={Wishlist} />
+        <Route path="/sale" component={SalePage} />
         <Route path="*" exact={true} component={ErrorPage} />
       </Switch>
       <Footer />

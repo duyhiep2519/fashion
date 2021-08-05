@@ -23,7 +23,6 @@ import axiosClient from "api/axiosClient";
 function Header() {
   const { isLogin, user } = useSelector((state) => state.user);
   const { cart, wishlist } = useSelector((state) => state.cart);
-  console.log(wishlist);
 
   const dispatch = useDispatch();
 
@@ -122,7 +121,7 @@ function Header() {
               </Link>
             </li>
             <li className="tabBottom-item">
-              <Link to="/">
+              <Link to="/sale">
                 <span>
                   <AiOutlineGift />
                   Sale
@@ -204,7 +203,7 @@ function Header() {
               <Link to="/">Product</Link>
             </li>
             <li className="header__nav-item">
-              <Link to="/">Sale</Link>
+              <Link to="/sale">Sale</Link>
             </li>
           </ul>
           <ul className="header__nav-list">

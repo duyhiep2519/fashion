@@ -38,6 +38,7 @@ function ProductCard(props) {
         });
       })
       .catch((err) => {
+        console.error(err);
         toast.error(err.response.data.message, {
           position: "top-right",
           autoClose: 1000,
