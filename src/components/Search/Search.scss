@@ -1,0 +1,192 @@
+@import "styles/variables";
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes slideToLeft {
+  from {
+    opacity: 0;
+    transform: translatex(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+.search {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9999;
+  opacity: 0;
+  animation: fadeIn ease-in-out 0.5s forwards;
+  transition: all 0.5s ease-in-out;
+  .search__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  .search__body {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 340px;
+    background-color: $white;
+    padding: 10px 0;
+    animation: slideToLeft linear 0.3s forwards;
+    transition: all 0.3s linear;
+    .search__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(129, 129, 129, 0.2);
+      padding: 10px;
+      span {
+        font-size: 22px;
+        font-weight: 600;
+        cursor: pointer;
+        &:hover {
+          color: $primary;
+        }
+      }
+    }
+    .search__filter {
+      text-align: center;
+      padding: 40px 0;
+      border-bottom: 1px solid rgba(129, 129, 129, 0.2);
+      .search__select {
+        select {
+          width: 80%;
+          height: 40px;
+          border: 1px solid rgba(129, 129, 129, 0.2);
+          background-color: transparent;
+          outline: none;
+          color: #222;
+          border-radius: 30px;
+          padding: 0 30px 0 15px;
+          background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNSIgaGVpZ2h0PSIyNSIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2U9IiNiYmIiPjxwYXRoIGQ9Ik02IDlsNiA2IDYtNiIvPjwvc3ZnPg==");
+          background-position: right 10px top 50%;
+          background-size: auto 18px;
+          background-repeat: no-repeat;
+          display: inline-block;
+          appearance: none;
+        }
+      }
+      .search__input {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+        justify-content: space-around;
+        input[type="text"] {
+          padding: 0 50px 0 20px;
+          height: 40px;
+          border: 1px solid #e3e3e3;
+          width: 80%;
+          line-height: 18px;
+          color: #222;
+          border-radius: 30px;
+          appearance: none;
+          display: inline-block;
+          outline: none;
+        }
+        a.btn-active,
+        span.btn-disabled {
+          position: absolute;
+          top: 3px;
+          right: 37px;
+          bottom: 0;
+          padding: 0;
+          width: 35px;
+          height: 35px;
+          border-radius: 50%;
+          border: none;
+          background-color: transparent;
+          font-size: 20px;
+          color: $primary;
+
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          svg {
+            color: $text;
+          }
+        }
+        a.btn-active {
+          background-color: $primary;
+          cursor: pointer;
+        }
+        span.btn-disabled {
+          cursor: default;
+        }
+      }
+    }
+    .search__result {
+      overflow: hidden;
+      position: relative;
+      .search__result-header {
+        position: relative;
+        padding: 10px 20px;
+        border-bottom: 1px solid rgba(129, 129, 129, 0.2);
+        box-shadow: -1px 9px 9px 3px rgba(209, 209, 209, 0.8);
+        z-index: 99;
+
+        span {
+          font-size: 16px;
+          font-weight: 400;
+          color: $text;
+        }
+      }
+      .search__result-content {
+        position: relative;
+        flex: 1 1 auto;
+        overflow: hidden;
+        width: 100%;
+        height: 600px;
+        .search__scroll {
+          overflow: auto;
+          overflow-x: hidden;
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          .search__product {
+            padding: 10px 5px;
+            display: flex;
+            width: 300px;
+            justify-content: space-around;
+            img {
+              width: 30%;
+            }
+            .search__product-info {
+              width: 170px;
+              a {
+                color: $text;
+                font-size: 14px;
+                overflow: hidden;
+                overflow-wrap: break-word;
+                text-decoration: none;
+                &:hover {
+                  color: $primary;
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

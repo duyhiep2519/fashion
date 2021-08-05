@@ -1,0 +1,17 @@
+@import "styles/variables";
+.search__page {
+  text-align: center;
+  min-height: 600px;
+  .search__page-header {
+    font-size: 20px;
+    margin-bottom: 20px;
+    height: 100px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $white;
+    font-weight: bold;
+  }
+}

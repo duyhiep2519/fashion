@@ -10,3 +10,4 @@ export { default as QuickShop } from "./QuickShop";
 export { default as Suggestion } from "./Suggestion";
 export { default as Footer } from "./Footer";
 export { default as RecentView } from "./RecentView";
+export { default as Search } from "./Search";

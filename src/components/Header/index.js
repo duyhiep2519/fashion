@@ -1,4 +1,4 @@
-import { Badge, CartSlide } from "components";
+import { Badge, CartSlide, Search } from "components";
 import React, { useEffect, useState } from "react";
 import GoogleLogin from "react-google-login";
 import {
@@ -23,6 +23,7 @@ import axiosClient from "api/axiosClient";
 function Header() {
   const { isLogin, user } = useSelector((state) => state.user);
   const { cart, wishlist } = useSelector((state) => state.cart);
+  const [showSearch, setShowSearch] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -69,6 +70,7 @@ function Header() {
   }
   return (
     <>
+      <Search show={showSearch} setShow={setShowSearch} />
       <CartSlide show={showCart} setShow={setShowCart} />
       <div className="header grid ">
         <input type="checkbox" id="auth-checkbox" />
@@ -199,18 +201,16 @@ function Header() {
             <li className="header__nav-item">
               <Link to="/">Home</Link>
             </li>
-            <li className="header__nav-item">
-              <Link to="/">Product</Link>
-            </li>
+
             <li className="header__nav-item">
               <Link to="/sale">Sale</Link>
             </li>
           </ul>
           <ul className="header__nav-list">
             <li className="header__nav-item">
-              <Link to="/">
+              <span onClick={() => setShowSearch(true)}>
                 <AiOutlineSearch />
-              </Link>
+              </span>
             </li>
 
             <li className="header__nav-item">

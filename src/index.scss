@@ -1,6 +1,8 @@
 body {
   background: #ffffff;
   font-family: "Poppins", sans-serif;
+  overflow: auto;
+  overflow-x: hidden;
 }
 * {
   box-sizing: border-box;

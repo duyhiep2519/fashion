@@ -1,18 +1,19 @@
+import axiosClient from "api/axiosClient";
+import { QuickShop, QuickView } from "components";
+import { getPrice, getPriceSale } from "helper/price";
 import React, { useState } from "react";
-import "./ProductCard.scss";
 import {
+  AiOutlineDelete,
+  AiOutlineEye,
   AiOutlineHeart,
   AiOutlineShoppingCart,
-  AiOutlineEye,
-  AiOutlineDelete,
 } from "react-icons/ai";
-import { QuickView, QuickShop } from "components";
+import { useDispatch } from "react-redux";
 import ClipLoader from "react-spinners/ClipLoader";
-import { getPriceSale, getPrice } from "helper/price";
-import axiosClient from "api/axiosClient";
 import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
 import { getWishlistByUser } from "redux/ducks/cartSlice";
+import "./ProductCard.scss";
+
 function ProductCard(props) {
   const { product, wishlist } = props;
   const [imgBackground, setImageBackground] = useState(product.image[0]);
