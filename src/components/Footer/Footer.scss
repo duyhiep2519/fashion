@@ -12,6 +12,10 @@
 
       min-height: 40px;
       text-transform: capitalize;
+      img {
+        width: 50%;
+        cursor: pointer;
+      }
     }
     p {
       color: $text;
@@ -34,6 +38,7 @@
       }
     }
     .footer__form {
+      width: 300px;
       position: relative;
       input[type="text"] {
         display: block;
@@ -48,7 +53,7 @@
       }
       button {
         position: absolute;
-        right: 125px;
+        right: 5px;
         top: 2px;
         border: 1px solid rgb(22, 22, 22);
         background-color: $text;
@@ -90,11 +95,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        button {
-          position: relative;
-          top: 10px;
-          right: 0;
-        }
+        margin-left: 20%;
       }
     }
   }

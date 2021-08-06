@@ -59,7 +59,7 @@ function Home() {
       ) : (
         <div className="home">
           <Slider />
-          <GridContent />{" "}
+          <GridContent />
           <Section title="trending" subtitle="Top view in this week" />
           <div className="grid wide">
             <div className="row">

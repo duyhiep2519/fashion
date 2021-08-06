@@ -63,6 +63,12 @@
   justify-content: space-between;
   padding: 0 25px;
   width: 100wh;
+  .header__nav-logo {
+    img {
+      width: 50%;
+      cursor: pointer;
+    }
+  }
 
   .header__nav-list,
   .header__nav-list--mobile {
@@ -332,8 +338,20 @@ input {
     }
   }
   .header__nav {
+    .nav__menu-list {
+      .nav__menu-item {
+        a {
+          text-decoration: none;
+          color: $text;
+        }
+      }
+    }
     .header__nav-logo {
       margin: 0 auto;
+      img {
+        width: 50%;
+        cursor: pointer;
+      }
     }
     .header__nav-list {
       display: none;

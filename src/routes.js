@@ -7,6 +7,7 @@ import {
   ErrorPage,
   SalePage,
   Search,
+  Category,
 } from "pages";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Header, Footer } from "components";
@@ -57,6 +58,7 @@ function App() {
         <Route name="Wishlist" path="/wishlist" component={Wishlist} />
         <Route path="/sale" component={SalePage} />
         <Route path="/search" component={Search} />
+        <Route path="/category" component={Category} />
         <Route path="*" exact={true} component={ErrorPage} />
       </Switch>
       <Footer />

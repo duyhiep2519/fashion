@@ -31,7 +31,7 @@
     background: $white;
     position: fixed;
     right: 0;
-    overflow: scroll;
+
     .cartslide__header {
       display: flex;
       justify-content: space-between;
@@ -52,6 +52,9 @@
       border-bottom: 1px solid rgba(129, 129, 129, 0.2);
     }
     .cartslide__list {
+      overflow: auto;
+      overflow-x: hidden;
+      height: 400px;
       .cartslide__item {
         border-bottom: 1px solid rgba(129, 129, 129, 0.2);
         display: flex;
@@ -63,11 +66,13 @@
           width: 30%;
         }
         .cartslide__info {
+          width: 200px;
           .cartslide__name,
           .cartslide__price {
             font-size: 16px;
             color: $text;
             font-weight: 500;
+            word-break: break-all;
           }
           .cartslide__price {
             opacity: 0.7;
@@ -76,36 +81,8 @@
         .cartslide__input {
           display: flex;
           align-items: center;
-          border: 1px solid rgba(129, 129, 129, 0.8);
-          border-radius: 30px;
-          padding: 2px 20px;
-          input {
-            display: block;
-            width: 34px;
-            height: 34px;
-            border: none;
-            outline: none;
-            text-align: center;
-          }
-          span {
-            cursor: pointer;
-            svg {
-              font-weight: 600;
-              font-size: 14px;
-            }
-          }
-        }
-        .cartslide__delete {
-          padding-top: 10px;
-          span {
-            font-size: 20px;
-            color: $text;
 
-            &:hover {
-              color: $primary;
-              cursor: pointer;
-            }
-          }
+          width: 150px;
         }
       }
     }

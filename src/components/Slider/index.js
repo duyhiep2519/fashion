@@ -6,10 +6,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/swiper.scss";
 import "./Slider.scss";
+import * as Scroll from "react-scroll";
 
 SwiperCore.use([Pagination]);
 
 function Slider() {
+  let scroll = Scroll.animateScroll;
   const [change, setChange] = useState(0);
 
   return (
@@ -30,7 +32,12 @@ function Slider() {
             >
               <span>SUMMER SALE 2020</span>
               <h1>NEW ARRIVAL COLLECTION</h1>
-              <div className="swiper__btn">Explore Now</div>
+              <div
+                className="swiper__btn"
+                onClick={() => scroll.scrollTo(1500)}
+              >
+                Explore Now
+              </div>
             </div>
             <img
               alt="slide"
@@ -49,7 +56,12 @@ function Slider() {
             >
               <span>SUMMER SALE 2020</span>
               <h1>NEW ARRIVAL COLLECTION</h1>
-              <div className="swiper__btn">Explore Now</div>
+              <div
+                className="swiper__btn"
+                onClick={() => scroll.scrollTo(1500)}
+              >
+                Explore Now
+              </div>
             </div>
             <img
               alt="slide"
@@ -68,7 +80,12 @@ function Slider() {
             >
               <span>SUMMER SALE 2020</span>
               <h1>NEW ARRIVAL COLLECTION</h1>
-              <div className="swiper__btn">Explore Now</div>
+              <div
+                className="swiper__btn"
+                onClick={() => scroll.scrollTo(1500)}
+              >
+                Explore Now
+              </div>
             </div>
             <img
               alt="slide"

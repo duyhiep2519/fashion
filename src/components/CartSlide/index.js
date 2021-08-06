@@ -1,11 +1,7 @@
 import axiosClient from "api/axiosClient";
+import { getPrice, getPriceSale } from "helper/price";
 import React, { useEffect, useState } from "react";
-import {
-  AiOutlineClose,
-  AiOutlineDelete,
-  AiOutlineMinus,
-  AiOutlinePlus,
-} from "react-icons/ai";
+import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { getCartByUser } from "redux/ducks/cartSlice";
@@ -25,6 +21,7 @@ function CartSlide(props) {
         .then((response) => {
           setCart(response);
           dispatch(getCartByUser(response));
+          console.log(response);
         })
         .catch((error) => {});
     }
@@ -39,7 +36,7 @@ function CartSlide(props) {
           {cart && cart.items ? (
             <div className="cartslide__body">
               <div className="cartslide__header">
-                <span>Shopping Cart</span>
+                <span>Review Cart</span>
                 <span onClick={() => setShow(false)}>
                   <AiOutlineClose />
                 </span>
@@ -48,82 +45,42 @@ function CartSlide(props) {
                 <span>Congratulations! You've got free shipping!</span>
               </div>
               <div className="cartslide__list">
-                {cart.items.length < 4
-                  ? cart.items.map((item, index) => (
-                      <div className="cartslide__item" key={index}>
-                        <img
-                          src={item.product.image[0]}
-                          alt="product"
-                          className="cartslide__img"
-                        />
-                        <div className="cartslide__info">
-                          <span className="cartslide__name">
-                            {item.product.name}
-                          </span>
-                          <p className="cartslide__price">
-                            ${item.product.price}
-                          </p>
-                          <div className="cartslide__input">
+                {cart.items &&
+                  cart.items.map((item, index) => (
+                    <div className="cartslide__item" key={index}>
+                      <img
+                        src={item.product.image[0]}
+                        alt="product"
+                        className="cartslide__img"
+                      />
+                      <div className="cartslide__info">
+                        <span className="cartslide__name">
+                          {item.product.name}
+                        </span>
+                        <p className="cartslide__price">
+                          {item.product.sale ? (
                             <span>
-                              <AiOutlineMinus />
+                              {getPrice(item.product.price)} -{" "}
+                              {getPriceSale(
+                                item.product.price,
+                                item.product.sale
+                              )}
                             </span>
-                            <input
-                              type="text"
-                              name="quantity"
-                              value={item.quantity}
-                            />
-                            <span>
-                              <AiOutlinePlus />
-                            </span>
-                          </div>
-                          <div className="cartslide__delete">
-                            <span>
-                              <AiOutlineDelete />
-                            </span>
-                          </div>
+                          ) : (
+                            getPrice(item.product.price)
+                          )}
+                        </p>
+                        <div className="cartslide__input">
+                          Quantity: {item.quantity}
                         </div>
                       </div>
-                    ))
-                  : cart.items.slice(0, 4).map((item, index) => (
-                      <div className="cartslide__item" key={index}>
-                        <img
-                          src={item.product.image[0]}
-                          alt="product"
-                          className="cartslide__img"
-                        />
-                        <div className="cartslide__info">
-                          <span className="cartslide__name">
-                            {item.product.name}
-                          </span>
-                          <p className="cartslide__price">
-                            ${item.product.price}
-                          </p>
-                          <div className="cartslide__input">
-                            <span>
-                              <AiOutlineMinus />
-                            </span>
-                            <input
-                              type="text"
-                              name="quantity"
-                              value={item.quantity}
-                            />
-                            <span>
-                              <AiOutlinePlus />
-                            </span>
-                          </div>
-                          <div className="cartslide__delete">
-                            <span>
-                              <AiOutlineDelete />
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
+                    </div>
+                  ))}
               </div>
               <div className="cartslide__checkout">
                 <div className="cartslide__subtotal">
                   <span>Subtotal:</span>
-                  <span>$65.00</span>
+                  <span>{getPrice(cart.totalPrice)}</span>
                 </div>
                 <div className="cartslide__btn">
                   <div

@@ -1,5 +1,6 @@
 import React from "react";
 import "./GridContent.scss";
+import { Link } from "react-router-dom";
 
 function GridContent() {
   return (
@@ -13,7 +14,12 @@ function GridContent() {
               }}
               className="gridcontent__picture gridcontent__picture--large"
             >
-              <div className="gridcontent__btn">Women</div>
+              <Link
+                className="gridcontent__btn"
+                to="/search?type=women&search_q="
+              >
+                Women
+              </Link>
             </div>
           </div>
           <div className="col l-6 m-6 c-12 ">
@@ -26,7 +32,12 @@ function GridContent() {
                     }}
                     className="gridcontent__picture gridcontent__picture--small  col l-12 c-12 m-12"
                   >
-                    <div className="gridcontent__btn">Acessories</div>
+                    <Link
+                      className="gridcontent__btn"
+                      to="/search?type=acessories&search_q="
+                    >
+                      Acessories
+                    </Link>
                   </div>
                   <div
                     style={{
@@ -35,7 +46,12 @@ function GridContent() {
                     className="gridcontent__picture gridcontent__picture--small  col l-12 c-12 m-12"
                   >
                     {" "}
-                    <div className="gridcontent__btn">Footwear</div>
+                    <Link
+                      className="gridcontent__btn"
+                      to="/search?type=footwear&search_q="
+                    >
+                      Footwear
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -46,7 +62,12 @@ function GridContent() {
                   }}
                   className="gridcontent__picture gridcontent__picture--large gridcontent__picture--watch"
                 >
-                  <div className="gridcontent__btn">Watches</div>
+                  <Link
+                    className="gridcontent__btn"
+                    to="/search?type=watches&search_q="
+                  >
+                    Watches
+                  </Link>
                 </div>
               </div>
             </div>

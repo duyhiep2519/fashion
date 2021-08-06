@@ -144,6 +144,30 @@ function Cart() {
                     </div>
                   </>
                 ))}
+              <div className="cart__checkout row">
+                <div className="cart__checkout--left col l-6 m-6 c-12">
+                  <p>Add Order Note</p>
+                  <textarea />
+                  <p>Coupon</p>
+                  <input placeholder="Coupon code" type="text" />
+                </div>
+                <div className="cart__checkout--right col l-6 m-6 c-12">
+                  <p>Congratulations! You've got free shipping!</p>
+                  <h2> Total {cart && getPrice(cart.totalPrice)}</h2>
+                  <span>
+                    Taxes, shipping and discounts codes calculated at checkou
+                  </span>
+                  <div className="cart--btn">
+                    <button
+                      onClick={() => {
+                        alert("Hihi, chưa làm!");
+                      }}
+                    >
+                      Check out
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           ) : (
             <div className="cart__noLogin">

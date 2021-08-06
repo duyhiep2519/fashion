@@ -19,6 +19,7 @@ import { getUser, userLogin, userLogout } from "redux/ducks/userSlice";
 import { getCartByUser } from "redux/ducks/cartSlice";
 import "./Header.scss";
 import axiosClient from "api/axiosClient";
+import logo from "assets/logo.png";
 
 function Header() {
   const { isLogin, user } = useSelector((state) => state.user);
@@ -184,22 +185,30 @@ function Header() {
               </label>
               <li className="nav__menu-item">Blog</li>
               <li className="nav__menu-item">Portfolio</li>
-              <li className="nav__menu-item">Search</li>
-              <li className="nav__menu-item">Wishlist</li>
-              <li className="nav__menu-item">Sale</li>
-              <li className="nav__menu-item last-child">Categories</li>
+              <li className="nav__menu-item">
+                <Link to="/wishlist">Wishlist</Link>
+              </li>
+              <li className="nav__menu-item">
+                {" "}
+                <Link to="/sale">Sale</Link>
+              </li>
+              <li className="nav__menu-item last-child">
+                <Link to="/category">Categories</Link>
+              </li>
             </ul>
           </div>
           <div className="header__nav-logo">
-            <img
-              alt="header-logo"
-              src="https://cdn.shopify.com/s/files/1/0332/6420/5963/files/kalles.svg?v=10756066450937027033"
-            />
+            <Link to="/">
+              <img alt="header-logo" src={logo} />
+            </Link>
           </div>
 
           <ul className="header__nav-list">
             <li className="header__nav-item">
               <Link to="/">Home</Link>
+            </li>
+            <li className="header__nav-item">
+              <Link to="/category">Categories</Link>
             </li>
 
             <li className="header__nav-item">
@@ -221,7 +230,6 @@ function Header() {
             </li>
             <li className="header__nav-item">
               <Link
-                to="/"
                 onClick={() => {
                   setShowCart(true);
                 }}

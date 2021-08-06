@@ -3,16 +3,14 @@ import { FiPhone } from "react-icons/fi";
 import { GoLocation, GoMail } from "react-icons/go";
 import { Link } from "react-router-dom";
 import "./Footer.scss";
+import logo from "assets/logo.png";
 
 function Footer() {
   return (
     <div className="footer row">
       <ul className="footer__info col l-4 m-4 c-12">
         <h3>
-          <img
-            alt="header-logo"
-            src="https://cdn.shopify.com/s/files/1/0332/6420/5963/files/kalles.svg?v=10756066450937027033"
-          />
+          <img alt="header-logo" src={logo} />
         </h3>
         <li>
           <GoLocation /> 64 Trieu Khuc, Thanh Xuan, HaNoi, Viet Nam
@@ -48,9 +46,7 @@ function Footer() {
 
         <div className="footer__form">
           <input type="text" />
-          <button type="button" className="">
-            Subscribe
-          </button>
+          <button type="button">Subscribe</button>
         </div>
       </ul>
     </div>
