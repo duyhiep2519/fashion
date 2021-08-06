@@ -1,43 +1,74 @@
 import axiosClient from "api/axiosClient";
-import React from "react";
-import GoogleLogin from "react-google-login";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { userLogin } from "redux/ducks/userSlice";
 import "./Login.scss";
+import { useHistory } from "react-router-dom";
 
 function Login() {
   const dispatch = useDispatch();
   const history = useHistory();
-  //handle  google login
-  function responseSuccessGoogle(response) {
-    console.log(response.tokenId);
+  const [userLoginData, setUserLogin] = useState({
+    email: "",
+    password: "",
+  });
+
+  function handleLogin() {
     axiosClient
-      .post("/user/login", {
-        idToken: response.tokenId,
+      .post("/user/login", userLoginData)
+      .then((response) => {
+        dispatch(userLogin(response));
+        setTimeout(() => {
+          history.push("/");
+        }, 500);
       })
-      .then((res) => {
-        dispatch(userLogin(res));
-        history.goBack();
-      })
-      .catch((error) => {});
+      .catch((error) => console.error(error));
   }
-  function responseErrorGoogle(response) {
-    console.log(response);
-  }
+
   return (
     <div className="login">
-      <h1>Login</h1>
-      <div className="auth__google">
-        <GoogleLogin
-          className="google-login"
-          clientId="766423151097-um2alq61rhsnce9ar0af6a9hdp031d0n.apps.googleusercontent.com"
-          buttonText="Login with Google"
-          onSuccess={responseSuccessGoogle}
-          onFailure={responseErrorGoogle}
-          cookiePolicy={"single_host_origin"}
-        ></GoogleLogin>
-        <span>Login with Google Account</span>
+      <div className="form__login">
+        <div className="register">
+          <h1>LOGIN</h1>
+          <div className="register-form">
+            <div className="register-input">
+              <input
+                type="email"
+                placeholder="Email"
+                value={userLoginData.email}
+                onChange={(e) =>
+                  setUserLogin({
+                    ...userLoginData,
+                    email: e.target.value,
+                  })
+                }
+              />
+            </div>
+            <div className="register-input">
+              <input
+                type="password"
+                placeholder="Password"
+                value={userLogin.password}
+                onChange={(e) =>
+                  setUserLogin({
+                    ...userLoginData,
+                    password: e.target.value,
+                  })
+                }
+              />
+            </div>
+            <div className="register-input">
+              <input
+                type="submit"
+                value="Login"
+                className="register-btn"
+                onClick={handleLogin}
+              />
+            </div>
+            <a href="/register">Create account</a>
+            <a href="/">Return to store</a>
+          </div>
+        </div>
       </div>
     </div>
   );

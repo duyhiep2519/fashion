@@ -7,3 +7,4 @@ export { default as ErrorPage } from "./404";
 export { default as SalePage } from "./Sales";
 export { default as Search } from "./Search";
 export { default as Category } from "./Category";
+export { default as Register } from "./Register";

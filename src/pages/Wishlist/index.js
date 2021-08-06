@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 function Wishlist() {
   const dispatch = useDispatch();
-  const { wishlist } = useSelector((state) => state.cart);
+  const [wishlist, setWishlist] = useState();
 
   const [loadPage, setLoadPage] = useState(false);
   useEffect(() => {
@@ -21,6 +21,7 @@ function Wishlist() {
           setLoadPage(true);
           setTimeout(() => {
             dispatch(getWishlistByUser(response));
+            setWishlist(response);
             setLoadPage(false);
           }, 1000);
         })

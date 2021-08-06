@@ -1,6 +1,7 @@
+import axiosClient from "api/axiosClient";
+import logo from "assets/logo.png";
 import { Badge, CartSlide, Search } from "components";
 import React, { useEffect, useState } from "react";
-import GoogleLogin from "react-google-login";
 import {
   AiOutlineClose,
   AiOutlineGift,
@@ -15,18 +16,40 @@ import {
 } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getUser, userLogin, userLogout } from "redux/ducks/userSlice";
 import { getCartByUser } from "redux/ducks/cartSlice";
+import { getUser, userLogin, userLogout } from "redux/ducks/userSlice";
 import "./Header.scss";
-import axiosClient from "api/axiosClient";
-import logo from "assets/logo.png";
+import ClipLoader from "react-spinners/ClipLoader";
 
 function Header() {
   const { isLogin, user } = useSelector((state) => state.user);
   const { cart, wishlist } = useSelector((state) => state.cart);
+  const [loading, setLoading] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
-
   const dispatch = useDispatch();
+  const [userLoginData, setUserLogin] = useState({
+    email: "",
+    password: "",
+  });
+
+  function handleLogin() {
+    setLoading(true);
+    axiosClient
+      .post("/user/login", userLoginData)
+      .then((response) => {
+        console.log(response);
+        setTimeout(() => {
+          dispatch(userLogin(response));
+          window.location.reload(false);
+          document.body.style.overflow = "unset";
+          setLoading(false);
+        }, 500);
+      })
+      .catch((error) => {
+        alert(error.message);
+        setLoading(false);
+      });
+  }
 
   useEffect(() => {
     function fetchUser() {
@@ -50,24 +73,24 @@ function Header() {
   }, [dispatch]);
 
   const [showCart, setShowCart] = useState(false);
-  //handle  google login
-  function responseSuccessGoogle(response) {
-    axiosClient
-      .post("/user/login", {
-        idToken: response.tokenId,
-      })
-      .then((res) => {
-        dispatch(userLogin(res));
-        setTimeout(() => {
-          window.location.reload(false);
-          document.body.style.overflow = "unset";
-        }, 1000);
-      })
-      .catch((error) => {});
-  }
-  function responseErrorGoogle(response) {
-    console.log(response);
-  }
+  // //handle  google login
+  // function responseSuccessGoogle(response) {
+  //   axiosClient
+  //     .post("/user/login", {
+  //       idToken: response.tokenId,
+  //     })
+  //     .then((res) => {
+  //       dispatch(userLogin(res));
+  //       setTimeout(() => {
+  //         window.location.reload(false);
+  //         document.body.style.overflow = "unset";
+  //       }, 1000);
+  //     })
+  //     .catch((error) => {});
+  // }
+  // function responseErrorGoogle(response) {
+  //   console.log(response);
+  // }
   return (
     <>
       <Search show={showSearch} setShow={setShowSearch} />
@@ -77,7 +100,7 @@ function Header() {
         <label htmlFor="auth-checkbox" className="auth__overlay"></label>
         <div className="auth">
           <div className="auth__title">
-            <span>Google Auth</span>
+            <span>Login</span>
             <span>
               <label htmlFor="auth-checkbox">
                 <AiOutlineClose />
@@ -99,16 +122,64 @@ function Header() {
               </div>
             </div>
           ) : (
-            <div className="auth__google">
-              <GoogleLogin
-                className="google-login"
-                clientId="766423151097-um2alq61rhsnce9ar0af6a9hdp031d0n.apps.googleusercontent.com"
-                buttonText="Login with Google"
-                onSuccess={responseSuccessGoogle}
-                onFailure={responseErrorGoogle}
-                cookiePolicy={"single_host_origin"}
-              ></GoogleLogin>
-              <span>Login with Google Account</span>
+            // <div className="auth__google">
+            //   <GoogleLogin
+            //     className="google-login"
+            //     clientId="766423151097-um2alq61rhsnce9ar0af6a9hdp031d0n.apps.googleusercontent.com"
+            //     buttonText="Login with Google"
+            //     onSuccess={responseSuccessGoogle}
+            //     onFailure={responseErrorGoogle}
+            //     cookiePolicy={"single_host_origin"}
+            //   ></GoogleLogin>
+            //   <span>Login with Google Account</span>
+            // </div>
+            <div className="form__login">
+              <div className="register">
+                <h1>LOGIN</h1>
+                <div className="register-form">
+                  <div className="register-input">
+                    <input
+                      type="email"
+                      placeholder="Email"
+                      value={userLoginData.email}
+                      onChange={(e) =>
+                        setUserLogin({
+                          ...userLoginData,
+                          email: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+                  <div className="register-input">
+                    <input
+                      type="password"
+                      placeholder="Password"
+                      value={userLogin.password}
+                      onChange={(e) =>
+                        setUserLogin({
+                          ...userLoginData,
+                          password: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+                  <div className="register-input">
+                    <button
+                      type="button"
+                      className="register-btn"
+                      onClick={handleLogin}
+                    >
+                      {loading ? (
+                        <ClipLoader loading={loading} size={15} color="black" />
+                      ) : (
+                        "Login"
+                      )}
+                    </button>
+                  </div>
+                  <a href="/register">Create account</a>
+                  <a href="/">Return to store</a>
+                </div>
+              </div>
             </div>
           )}
         </div>

@@ -8,6 +8,7 @@ import {
   SalePage,
   Search,
   Category,
+  Register,
 } from "pages";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Header, Footer } from "components";
@@ -59,6 +60,7 @@ function App() {
         <Route path="/sale" component={SalePage} />
         <Route path="/search" component={Search} />
         <Route path="/category" component={Category} />
+        <Route path="/register" component={Register} />
         <Route path="*" exact={true} component={ErrorPage} />
       </Switch>
       <Footer />
