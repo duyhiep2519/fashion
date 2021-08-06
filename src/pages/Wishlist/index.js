@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import "./Wishlist.scss";
 import axiosClient from "api/axiosClient";
 import { ProductCard } from "components";
-import { useDispatch, useSelector } from "react-redux";
-import { getWishlistByUser } from "redux/ducks/cartSlice";
-import FadeLoader from "react-spinners/FadeLoader";
+import React, { useEffect, useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import FadeLoader from "react-spinners/FadeLoader";
+import { getWishlistByUser } from "redux/ducks/cartSlice";
+import "./Wishlist.scss";
 
 function Wishlist() {
   const dispatch = useDispatch();
