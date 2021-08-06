@@ -52,7 +52,6 @@ function Header() {
   const [showCart, setShowCart] = useState(false);
   //handle  google login
   function responseSuccessGoogle(response) {
-    console.log(response.tokenId);
     axiosClient
       .post("/user/login", {
         idToken: response.tokenId,
